@@ -33,8 +33,8 @@ export const startServer = async (routes: Routes[]) => {
   app.use(cookieParser());
 
   //initializeRoutes
-  routes.forEach(route => {
-    app.use('/', route.router);
+  routes.forEach(({ path, router }) => {
+    app.use(path, router);
   });
 
   //initializeSwagger

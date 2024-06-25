@@ -7,10 +7,10 @@ import { ValidationMiddleware } from '@middlewares/validation.middleware';
 const path = '/users';
 const router = Router();
 
-router.get(`${path}`, UserController.getUsers);
-router.get(`${path}/:id`, UserController.getUserById);
-router.post(`${path}`, ValidationMiddleware(CreateUserDto), UserController.createUser);
-router.put(`${path}/:id`, ValidationMiddleware(CreateUserDto, true), UserController.updateUser);
-router.delete(`${path}/:id`, UserController.deleteUser);
+router.get('', UserController.getUsers);
+router.get('/:id', UserController.getUserById);
+router.post('', ValidationMiddleware(CreateUserDto), UserController.createUser);
+router.put('/:id', ValidationMiddleware(CreateUserDto, true), UserController.updateUser);
+router.delete('/:id', UserController.deleteUser);
 
-export const UserRoute: Routes = { router };
+export const UserRoute: Routes = { path, router };

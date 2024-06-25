@@ -8,8 +8,8 @@ import { ValidationMiddleware } from '@middlewares/validation.middleware';
 const path = '/';
 const router = Router();
 
-router.post(`${path}signup`, ValidationMiddleware(CreateUserDto), AuthController.signUp);
-router.post(`${path}login`, ValidationMiddleware(CreateUserDto), AuthController.logIn);
-router.post(`${path}logout`, AuthMiddleware, AuthController.logOut);
+router.post('signup', ValidationMiddleware(CreateUserDto), AuthController.signUp);
+router.post('login', ValidationMiddleware(CreateUserDto), AuthController.logIn);
+router.post('logout', AuthMiddleware, AuthController.logOut);
 
-export const AuthRoute: Routes = { router };
+export const AuthRoute: Routes = { path, router };
