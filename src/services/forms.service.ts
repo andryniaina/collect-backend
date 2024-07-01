@@ -1,4 +1,4 @@
-import { HttpException } from '@/exceptions/httpException';
+import { HttpException } from '../exceptions/HttpException';
 import { FormModel } from '@/models/forms.model';
 
 export const createForm = async formData => {
