@@ -55,7 +55,7 @@ export const startServer = async (routes: Routes[]) => {
   app.use(ErrorMiddleware);
 
   //start server
-  app.listen(port, () => {
+  app.listen(+port,'0.0.0.0', () => {
     logger.info(`=================================`);
     logger.info(`======= ENV: ${env} =======`);
     logger.info(`🚀 App listening on the port ${port}`);
