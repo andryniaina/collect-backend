@@ -10,6 +10,9 @@ export class Field {
 
   @Prop({ required: true })
   name: string;
+
+  @Prop({default: true})
+  required: boolean;
 }
 
 export const FieldSchema = SchemaFactory.createForClass(Field);
