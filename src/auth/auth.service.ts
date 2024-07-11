@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from '../users/schemas/user.schema';
 import { hash, compare } from 'bcrypt';
+import { SignUpDto } from './dto/sign-up.dto';
 
 @Injectable()
 export class AuthService {
@@ -37,13 +38,14 @@ export class AuthService {
     };
   }
 
-  async signUp(username: string, email: string, pass: string, role:string): Promise<User> {
-    const hashedPassword = await hash(pass, 10);
+  async signUp(signUpDto: SignUpDto): Promise<User> {
+    const hashedPassword = await hash(signUpDto.password, 10);
 
     const userDto: CreateUserDto = {
-      name: username,
-      email: email,
-      role: role,
+      name: signUpDto.username,
+      email: signUpDto.email,
+      role: signUpDto.role,
+      phoneNumber: signUpDto.phoneNumber ?? "",
       password: hashedPassword,
     };
     const createdUser = await this.usersService.create(userDto);

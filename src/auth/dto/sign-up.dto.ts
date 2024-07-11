@@ -17,4 +17,7 @@ export class SignUpDto {
     @ApiProperty({description: "Role of the user"})
     @IsNotEmpty()
     role: string
+
+    @ApiProperty({description: "Phone Number of the user"})
+    phoneNumber?: string
 }
