@@ -37,12 +37,13 @@ export class AuthService {
     };
   }
 
-  async signUp(username: string, email: string, pass: string): Promise<User> {
+  async signUp(username: string, email: string, pass: string, role:string): Promise<User> {
     const hashedPassword = await hash(pass, 10);
 
     const userDto: CreateUserDto = {
       name: username,
       email: email,
+      role: role,
       password: hashedPassword,
     };
     const createdUser = await this.usersService.create(userDto);

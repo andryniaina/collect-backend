@@ -30,7 +30,7 @@ import { ApiTags } from '@nestjs/swagger';
     @HttpCode(HttpStatus.OK)
     @Post('register')
     signUp(@Body() signUpDto: SignUpDto) {
-      return this.authService.signUp(signUpDto.username, signUpDto.email, signUpDto.password);
+      return this.authService.signUp(signUpDto.username, signUpDto.email, signUpDto.password,signUpDto.role);
     }
   
     @Get('profile')
