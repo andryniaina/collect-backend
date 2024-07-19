@@ -19,6 +19,9 @@ export class User {
 
   @Prop()
   phoneNumber: string ;
+
+  @Prop()
+  status: string ;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

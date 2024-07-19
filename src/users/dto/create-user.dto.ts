@@ -4,4 +4,5 @@ export class CreateUserDto {
     password: String|string
     role: string
     phoneNumber?: string
+    status?:string
 }

@@ -4,6 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './schemas/user.schema'
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { hash, compare } from 'bcrypt';
+import { formatPasswordDTO } from './dto/format-password.dto';
 
 @Injectable()
 export class UsersService {
@@ -42,11 +44,38 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel.findByIdAndUpdate(id,{$set: updateUserDto},{new: true}).exec();
+    const hashedPassword = await hash(updateUserDto.password.toString(), 10);
+    let nameValue = "";
+    if (updateUserDto.role==="Agent") {
+      nameValue = updateUserDto.phoneNumber
+    }else{
+      nameValue = updateUserDto?.email?.toString();
+    }
+    const userDto: CreateUserDto = {
+      name: nameValue,
+      email: updateUserDto.email,
+      role: updateUserDto.role,
+      phoneNumber: updateUserDto.phoneNumber,
+      password: hashedPassword,
+      status : updateUserDto.status,
+    };
+    return this.userModel.findByIdAndUpdate(id,{$set: userDto},{new: true}).exec();
+  }
+
+  async formatPassword(id: string) {
+    const hashedPassword = await hash("azerty", 10);
+    const userDto: formatPasswordDTO = {
+      password: hashedPassword,
+      status : "false",
+    };
+    return this.userModel.findByIdAndUpdate(id,{$set: userDto},{new: true}).exec();
   }
 
   async remove(id: string) {
     await this.userModel.findByIdAndDelete(id).exec();
     return `Task #${id} deleted`;
+  }
+  async findByPhoneNumber(phoneNumber: string|String): Promise<any>{
+    return this.userModel.findOne({phoneNumber}).exec();
   }
 }

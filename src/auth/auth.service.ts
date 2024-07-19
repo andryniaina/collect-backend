@@ -39,14 +39,21 @@ export class AuthService {
   }
 
   async signUp(signUpDto: SignUpDto): Promise<User> {
-    const hashedPassword = await hash(signUpDto.password, 10);
+    const hashedPassword = await hash("azerty", 10);
+    let nameValue = "";
+    if (signUpDto.role==="Agent") {
+      nameValue = signUpDto.phoneNumber
+    }else{
+      nameValue = signUpDto.email
+    }
 
     const userDto: CreateUserDto = {
-      name: signUpDto.username,
+      name: nameValue,
       email: signUpDto.email,
       role: signUpDto.role,
       phoneNumber: signUpDto.phoneNumber ?? "",
       password: hashedPassword,
+      status : "false",
     };
     const createdUser = await this.usersService.create(userDto);
     return createdUser;
