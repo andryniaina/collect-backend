@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Form } from './schemas/form.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateFormDto } from './dto/create-form.dto';
+import { UpdateFieldsDto } from './dto/update-fields.dto';
 
 @Injectable()
 export class FormsService {
@@ -15,5 +16,22 @@ export class FormsService {
 
   async findAll() {
     return this.formModel.find().exec();
+  }
+
+  async findOne(id:string) {
+    return this.formModel.findById(id).exec() ;
+  }
+
+  async remove(id: string) {
+    await this.formModel.findByIdAndDelete(id).exec();
+    return `Form #${id} deleted`;
+  }
+
+  async updateFields(id:string, updateFieldsDto:UpdateFieldsDto) {
+    const existingForm = await this.formModel.findOneAndUpdate({_id:id},{$set: updateFieldsDto},{new:true}).exec() ;
+    if(!existingForm) {
+      throw new NotFoundException(`Form ${id} not found`) ;
+    }
+    return existingForm ;
   }
 }

@@ -25,7 +25,13 @@ export class Form {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ type: [FieldSchema], required: true })
+  @Prop()
+  description: string;
+
+  @Prop()
+  category: string;
+
+  @Prop({ type: [FieldSchema] })
   fields: Field[];
 }
 
