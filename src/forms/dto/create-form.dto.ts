@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsArray } from 'class-validator';
-import { Field } from '../schemas/form.schema';
+import { Condition, Field } from '../schemas/form.schema';
 
 export class CreateFormDto {
   @IsNotEmpty()
@@ -14,4 +14,8 @@ export class CreateFormDto {
 
   @IsNotEmpty()
   category: string;
+
+  fields?: Field[] ;
+
+  conditions?: Condition[];
 }

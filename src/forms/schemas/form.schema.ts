@@ -4,6 +4,19 @@ import { HydratedDocument } from 'mongoose';
 export type FormDocument = HydratedDocument<Form>;
 
 @Schema()
+export class Condition {
+  @Prop({ required: true })
+  field: string;
+
+  @Prop({ required: true })
+  comparator: string;
+
+  @Prop({ required: true })
+  value: string;
+}
+
+export const ConditionSchema = SchemaFactory.createForClass(Condition)
+@Schema()
 export class Field {
   @Prop({ required: true })
   type: string;
@@ -11,9 +24,13 @@ export class Field {
   @Prop({ required: true })
   name: string;
 
-  @Prop({default: true})
+  @Prop({ default: true })
   required: boolean;
+
+  @Prop({type: [ConditionSchema]})
+  conditions: Condition[];
 }
+
 
 export const FieldSchema = SchemaFactory.createForClass(Field);
 
