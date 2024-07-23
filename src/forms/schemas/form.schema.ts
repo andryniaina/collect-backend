@@ -16,6 +16,21 @@ export class Condition {
 }
 
 export const ConditionSchema = SchemaFactory.createForClass(Condition)
+
+@Schema()
+export class Validation {
+  @Prop({ required: true })
+  message: string;
+
+  @Prop({ required: true })
+  comparator: string;
+
+  @Prop({ required: true })
+  value: string;
+}
+
+export const ValidationSchema = SchemaFactory.createForClass(Validation)
+
 @Schema()
 export class Field {
   @Prop({ required: true })
