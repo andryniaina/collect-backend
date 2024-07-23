@@ -44,6 +44,9 @@ export class Field {
 
   @Prop({type: [ConditionSchema]})
   conditions: Condition[];
+
+  @Prop()
+  validation: Validation;
 }
 
 
