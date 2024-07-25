@@ -47,6 +47,12 @@ export class Field {
 
   @Prop()
   validation: Validation;
+
+  @Prop()
+  default: string;
+
+  @Prop()
+  guidance: string;
 }
 
 
