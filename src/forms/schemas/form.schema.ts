@@ -74,6 +74,9 @@ export class Form {
 
   @Prop({ type: [FieldSchema] })
   fields: Field[];
+
+  @Prop({default: "Deployed"})
+  status: string;
 }
 
 export const FormSchema = SchemaFactory.createForClass(Form);

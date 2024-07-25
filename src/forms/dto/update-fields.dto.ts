@@ -4,4 +4,6 @@ import { Field } from "../schemas/form.schema";
 export class UpdateFieldsDto {
     @IsArray()
     fields: Field[] ;
+
+    status?: string;
 }
