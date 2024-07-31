@@ -47,6 +47,9 @@ export class Field {
 
   @Prop()
   validation: Validation;
+
+  @Prop()
+  formula: string;
 }
 
 
