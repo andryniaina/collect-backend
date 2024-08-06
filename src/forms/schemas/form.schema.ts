@@ -56,6 +56,9 @@ export class Field {
 
   @Prop()
   guidance: string;
+
+  @Prop()
+  options: string[];
 }
 
 
