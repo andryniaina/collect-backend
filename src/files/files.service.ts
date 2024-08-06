@@ -38,7 +38,7 @@ export class FilesService {
       const fileName = file.originalname;
       const contentType = file.mimetype;
       const fileStream = file.buffer;
-
+      await this.createBucket(bucketName);
       await this.minioClient.putObject(bucketName, fileName, fileStream);
       console.log('File uploaded successfully.');
       return `File uploaded successfully: ${fileName}`;
@@ -51,6 +51,7 @@ export class FilesService {
   async uploadMultipleFiles(files: Express.Multer.File[]) {
     try {
       const bucketName = 'my-bucket';
+      await this.createBucket(bucketName);
 
       for (const file of files) {
         const fileName = file.originalname;
