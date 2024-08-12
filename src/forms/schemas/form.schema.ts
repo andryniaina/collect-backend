@@ -59,6 +59,9 @@ export class Field {
 
   @Prop()
   options: string[];
+
+  @Prop()
+  group: string;
 }
 
 
@@ -83,6 +86,9 @@ export class Form {
 
   @Prop({default: "Deployed"})
   status: string;
+
+  @Prop()
+  groups: string[];
 }
 
 export const FormSchema = SchemaFactory.createForClass(Form);
