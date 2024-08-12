@@ -20,4 +20,6 @@ export class CreateFormDto {
   conditions?: Condition[];
 
   validation?: Validation;
+
+  groups?: string[];
 }
