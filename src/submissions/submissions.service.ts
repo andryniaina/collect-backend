@@ -18,4 +18,8 @@ export class SubmissionsService {
   async findAll() {
     return this.submissionModel.find().exec();
   }
+
+  async findSubmissionsByFormId(formId: string) {
+    return this.submissionModel.find({ formId }).exec();
+  }
 }

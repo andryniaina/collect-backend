@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Request } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Request } from '@nestjs/common';
 import { SubmissionsService } from './submissions.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/auth/auth.decorator';
@@ -20,5 +20,12 @@ export class SubmissionsController {
   @Get()
   findAll(@Request() req) {
     return this.submissionsService.findAll();
+  }
+
+  @ApiTags('Endpoints for Submissions')
+  @Public()
+  @Get('form/:formId')
+  findSubmissionsByFormId(@Request() req, @Param('formId') formId: string) {
+    return this.submissionsService.findSubmissionsByFormId(formId);
   }
 }
