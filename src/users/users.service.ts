@@ -46,7 +46,7 @@ export class UsersService {
   async update(id: string, updateUserDto: UpdateUserDto) {
     const hashedPassword = await hash(updateUserDto.password.toString(), 10);
     let nameValue = "";
-    if (updateUserDto.role==="Agent") {
+    if (updateUserDto.role.toLowerCase() === "agent") {
       nameValue = updateUserDto.phoneNumber
     }else{
       nameValue = updateUserDto?.email?.toString();
