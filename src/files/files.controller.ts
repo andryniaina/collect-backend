@@ -17,7 +17,9 @@ export class FilesController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.filesService.uploadFile(file);
+    console.log(file);
+    this.filesService.uploadFile(file);
+    return file.originalname;
   }
 
   @Public()
