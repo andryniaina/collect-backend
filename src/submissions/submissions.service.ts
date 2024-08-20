@@ -20,6 +20,8 @@ export class SubmissionsService {
   }
 
   async findSubmissionsByFormId(formId: string) {
-    return this.submissionModel.find({ formId }).exec();
+    const submissions = await this.submissionModel.find({ formId }).exec();
+    const submissionsData = submissions.map(submission=>submission.data);
+    return submissionsData;
   }
 }

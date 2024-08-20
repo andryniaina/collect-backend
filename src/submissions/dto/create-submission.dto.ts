@@ -6,5 +6,5 @@ export class CreateSubmissionDto {
   formId: string;
 
   @IsNotEmpty()
-  data: string;
+  data: Record<string, any>;
 }

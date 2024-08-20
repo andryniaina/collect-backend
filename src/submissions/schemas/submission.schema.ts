@@ -11,8 +11,8 @@ export class Submission {
   @Prop({ type: Types.ObjectId, ref: 'Form', required: true })
   formId: Types.ObjectId;
 
-  @Prop({ required: true })
-  data: string;
+  @Prop({type: Object, required: true })
+  data: Record<string, any>;
 }
 
 export const SubmissionSchema = SchemaFactory.createForClass(Submission);
