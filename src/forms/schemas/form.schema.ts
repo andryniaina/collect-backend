@@ -32,6 +32,19 @@ export class Validation {
 export const ValidationSchema = SchemaFactory.createForClass(Validation)
 
 @Schema()
+export class ExternalData {
+  @Prop({ required: true })
+  formId: string;
+
+  @Prop({ required: true })
+  keyField: string;
+
+  @Prop({ required: true })
+  displayField: string[];
+}
+export const ExternalDataSchema = SchemaFactory.createForClass(ExternalData);
+
+@Schema()
 export class Field {
   @Prop({ required: true })
   type: string;
@@ -62,8 +75,10 @@ export class Field {
 
   @Prop()
   group: string;
-}
 
+  @Prop({type: ExternalDataSchema})
+  externalData: ExternalData;
+}
 
 export const FieldSchema = SchemaFactory.createForClass(Field);
 
