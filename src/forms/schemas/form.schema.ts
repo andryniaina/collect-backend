@@ -40,7 +40,7 @@ export class ExternalData {
   keyField: string;
 
   @Prop({ required: true })
-  displayField: string[];
+  displayFields: string[];
 }
 export const ExternalDataSchema = SchemaFactory.createForClass(ExternalData);
 
