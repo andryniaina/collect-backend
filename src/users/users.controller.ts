@@ -1,14 +1,15 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete,Request,HttpCode,HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { GroupService } from './group.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from './users.decorator';
-import { formatPasswordDTO } from './dto/format-password.dto';
+import { CreateGroupDto } from './dto/create-group.dto';
 
 @ApiTags("Endpoints for users information")
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService, private readonly groupService: GroupService) {}
 
   @Get()
   findAll() {
@@ -37,5 +38,19 @@ export class UsersController {
   formatPassword(@Param('id') id: string){
     return this.usersService.formatPassword(id);
   }
+
+  @Post("/group")
+  createGroup(@Body() createGroupDto: CreateGroupDto) {
+    return this.groupService.create(createGroupDto) ;
+  }
+
+  @Get("/group")
+  getGroups() {
+    return this.groupService.findAll() ;
+  }
   
+  @Get("/group/:groupId")
+  getGroup(@Param("groupId") groupId: string) {
+    return this.groupService.findOne(groupId) ;
+  }
 }
