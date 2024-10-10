@@ -39,16 +39,19 @@ export class UsersController {
     return this.usersService.formatPassword(id);
   }
 
+  @Public() //remove when prod
   @Post("/group")
   createGroup(@Body() createGroupDto: CreateGroupDto) {
     return this.groupService.create(createGroupDto) ;
   }
 
+  @Public() //remove when prod
   @Get("/group")
   getGroups() {
     return this.groupService.findAll() ;
   }
   
+  @Public() //remove when prod
   @Get("/group/:groupId")
   getGroup(@Param("groupId") groupId: string) {
     return this.groupService.findOne(groupId) ;
