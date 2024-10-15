@@ -9,7 +9,7 @@ export class Group {
   name: string;
 
   @Prop({ type: [Types.ObjectId], ref: 'User', required: false })
-  forms: Types.ObjectId[];
+  users: Types.ObjectId[];
 }
 
 export const GroupSchema = SchemaFactory.createForClass(Group);

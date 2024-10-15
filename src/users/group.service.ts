@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Group } from './schemas/group.schema';
 import { Model } from 'mongoose';
 import { CreateGroupDto } from './dto/create-group.dto';
+import { UpdateGroupDto } from './dto/update-group.dto';
 
 @Injectable()
 export class GroupService {
@@ -14,10 +15,18 @@ export class GroupService {
   }
 
   async findAll() {
-    return this.groupModel.find().exec();
+    return this.groupModel.find().populate('users').exec();
   }
 
   async findOne(groupId: string) {
-    return this.groupModel.findById(groupId).exec();
+    return this.groupModel.findById(groupId).populate('users').exec();
+  }
+
+  async deleteOne(groupId: string) {
+    return this.groupModel.findByIdAndDelete(groupId).exec();
+  }
+
+  async updateOne(groupId: string, updateGroupDto: UpdateGroupDto ){
+    return this.groupModel.updateOne({_id:groupId},{$set: updateGroupDto}).exec();
   }
 }
