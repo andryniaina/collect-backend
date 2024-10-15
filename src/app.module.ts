@@ -8,6 +8,7 @@ import { FormsModule } from './forms/forms.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SubmissionsModule } from './submissions/submissions.module';
 import { FilesModule } from './files/files.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { FilesModule } from './files/files.module';
     FormsModule,
     SubmissionsModule,
     FilesModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
