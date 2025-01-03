@@ -43,44 +43,44 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @Public()
+  
   @Get('phoneNumber/:phoneNumber')
   findPhoneNumber(@Param('phoneNumber') phoneNumber: string) {
     return this.usersService.findByPhoneNumber(phoneNumber);
   }
 
-  @Public()
+  
   @Patch('formatPassword/:id')
   formatPassword(@Param('id') id: string) {
     return this.usersService.formatPassword(id);
   }
 
-  @Public() //remove when prod
+   //remove when prod
   @Post('/group')
   createGroup(@Body() createGroupDto: CreateGroupDto) {
     console.log('GroupDto => ', createGroupDto);
     return this.groupService.create(createGroupDto);
   }
 
-  @Public() //remove when prod
+   //remove when prod
   @Get('/group')
   getGroups() {
     return this.groupService.findAll();
   }
 
-  @Public() //remove when prod
+   //remove when prod
   @Get('/group/:groupId')
   getGroup(@Param('groupId') groupId: string) {
     return this.groupService.findOne(groupId);
   }
 
-  @Public() //remove when prod
+   //remove when prod
   @Delete('/group/:groupId')
   deleteGroup(@Param('groupId') groupId: string) {
     return this.groupService.deleteOne(groupId);
   }
 
-  @Public()
+  
   @Put('/group/:groupId')
   updateGroup(
     @Param('groupId') groupId: string,

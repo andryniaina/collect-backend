@@ -14,16 +14,28 @@ export class Project {
   description: string;
 
   @Prop()
-  startDate: Date;
+  endDate: Date;
 
   @Prop()
-  endDate: Date;
+  region: string;
+
+  @Prop()
+  priority: string;
+
+  @Prop()
+  section: string;
+
+  @Prop({ type: Types.ObjectId, ref: 'User' })
+  responsable: User;
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })
   agents: User[];
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Form' }] })
   forms: Form[];
+
+  @Prop({ default: 'En cours' })
+  status: string;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

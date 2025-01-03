@@ -13,7 +13,7 @@ import { Public } from 'src/auth/auth.decorator';
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
-  @Public()
+  
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
@@ -22,7 +22,7 @@ export class FilesController {
     return file.originalname;
   }
 
-  @Public()
+  
   @Post('upload/multiple')
   @UseInterceptors(FilesInterceptor('files'))
   uploadFiles(@UploadedFiles() files: Array<Express.Multer.File>) {

@@ -27,6 +27,9 @@ export class AuthService {
       }
     }
 
+    console.log(pass)
+    console.log(user);
+
     const isPasswordMatching: boolean = await compare(pass, user.password);
 
     if (!isPasswordMatching) {
@@ -39,22 +42,9 @@ export class AuthService {
   }
 
   async signUp(signUpDto: SignUpDto): Promise<User> {
-    const hashedPassword = await hash("azerty", 10);
-    let nameValue = "";
-    if (signUpDto.role==="Agent") {
-      nameValue = signUpDto.phoneNumber
-    }else{
-      nameValue = signUpDto.email
-    }
-
-    const userDto: CreateUserDto = {
-      name: nameValue,
-      email: signUpDto.email,
-      role: signUpDto.role,
-      phoneNumber: signUpDto.phoneNumber ?? "",
-      password: hashedPassword,
-      status : "false",
-    };
+    const userDto: CreateUserDto = signUpDto as CreateUserDto;
+    const hashedPassword = await hash(userDto.password.toString(), 10);
+    userDto.password = hashedPassword;
     const createdUser = await this.usersService.create(userDto);
     return createdUser;
   }

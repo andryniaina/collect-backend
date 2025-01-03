@@ -15,7 +15,7 @@ export class Condition {
   value: string;
 }
 
-export const ConditionSchema = SchemaFactory.createForClass(Condition)
+export const ConditionSchema = SchemaFactory.createForClass(Condition);
 
 @Schema()
 export class Validation {
@@ -29,7 +29,7 @@ export class Validation {
   value: string;
 }
 
-export const ValidationSchema = SchemaFactory.createForClass(Validation)
+export const ValidationSchema = SchemaFactory.createForClass(Validation);
 
 @Schema()
 export class ExternalData {
@@ -55,7 +55,7 @@ export class Field {
   @Prop({ default: true })
   required: boolean;
 
-  @Prop({type: [ConditionSchema]})
+  @Prop({ type: [ConditionSchema] })
   conditions: Condition[];
 
   @Prop()
@@ -76,7 +76,7 @@ export class Field {
   @Prop()
   group: string;
 
-  @Prop({type: ExternalDataSchema})
+  @Prop({ type: ExternalDataSchema })
   externalData: ExternalData;
 }
 
@@ -94,12 +94,24 @@ export class Form {
   description: string;
 
   @Prop()
-  category: string;
+  section: string;
+
+  @Prop()
+  type: string;
+
+  @Prop()
+  country: string;
+
+  @Prop()
+  header: string;
+
+  @Prop()
+  logo: string;
 
   @Prop({ type: [FieldSchema] })
   fields: Field[];
 
-  @Prop({default: "Deployed"})
+  @Prop({ default: 'Deployed' })
   status: string;
 
   @Prop()

@@ -9,11 +9,20 @@ export class CreateFormDto {
   @IsNotEmpty()
   description: string;
 
-  @IsNotEmpty()
-  version: string;
+  version?: string;
 
   @IsNotEmpty()
-  category: string;
+  section: string;
+
+  @IsNotEmpty()
+  type: string;
+
+  @IsNotEmpty()
+  country: string;
+
+  header?: string;
+
+  logo?: string;
 
   fields?: Field[] ;
 
