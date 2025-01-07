@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
+import { Project } from 'src/project/schemas/project.schema';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -22,6 +23,13 @@ export class User {
 
   @Prop()
   status: string;
+
+  @Prop()
+  description: string;
+
+  // Foreign key reference to the Project model
+  @Prop({ type: Types.ObjectId, ref: 'Project'})
+  project: Project;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

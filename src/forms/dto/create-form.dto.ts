@@ -31,4 +31,6 @@ export class CreateFormDto {
   validation?: Validation;
 
   groups?: string[];
+
+  project?: string;
 }

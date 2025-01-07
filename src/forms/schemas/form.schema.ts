@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+import { Project } from 'src/project/schemas/project.schema';
 
 export type FormDocument = HydratedDocument<Form>;
 
@@ -50,6 +51,9 @@ export class Field {
   type: string;
 
   @Prop({ required: true })
+  title: string;
+
+  @Prop({ required: true })
   name: string;
 
   @Prop({ default: true })
@@ -59,10 +63,7 @@ export class Field {
   conditions: Condition[];
 
   @Prop()
-  validation: Validation;
-
-  @Prop()
-  formula: string;
+  validations: Validation[];
 
   @Prop()
   default: string;
@@ -116,6 +117,10 @@ export class Form {
 
   @Prop()
   groups: string[];
+
+  // Foreign key reference to the Project model
+  @Prop({ type: Types.ObjectId, ref: 'Project'})
+  project: Project;
 }
 
 export const FormSchema = SchemaFactory.createForClass(Form);

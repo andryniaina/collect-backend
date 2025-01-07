@@ -5,4 +5,6 @@ export class CreateUserDto {
     role?: string
     phoneNumber?: string
     status?:string
+    description?:string
+    project?:string
 }

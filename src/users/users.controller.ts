@@ -18,6 +18,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Public } from './users.decorator';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @ApiTags('Endpoints for users information')
 @Controller('users')
@@ -35,6 +36,11 @@ export class UsersController {
   @Get('emails')
   findEmails() {
     return this.usersService.findEmails();
+  }
+
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @HttpCode(HttpStatus.OK)

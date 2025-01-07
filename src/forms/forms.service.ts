@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateFormDto } from './dto/create-form.dto';
 import { UpdateFieldsDto } from './dto/update-fields.dto';
+import { DeleteFormsDto } from './dto/delete-forms.dto';
 
 @Injectable()
 export class FormsService {
@@ -25,6 +26,12 @@ export class FormsService {
   async remove(id: string) {
     await this.formModel.findByIdAndDelete(id).exec();
     return `Form #${id} deleted`;
+  }
+
+  async deleteAll(deleteFormsDto:DeleteFormsDto) {
+    const { ids } = deleteFormsDto;
+    await this.formModel.deleteMany({ _id: { $in: ids } }).exec();
+    return `Forms #${ids} deleted`;
   }
 
   async updateFields(id:string, updateFieldsDto:UpdateFieldsDto) {

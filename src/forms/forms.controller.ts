@@ -11,6 +11,7 @@ import {
 import { FormsService } from './forms.service';
 import { CreateFormDto } from './dto/create-form.dto';
 import { UpdateFieldsDto } from './dto/update-fields.dto';
+import { DeleteFormsDto } from './dto/delete-forms.dto';
 
 @Controller('forms')
 export class FormsController {
@@ -38,6 +39,11 @@ export class FormsController {
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.FormsService.remove(id);
+  }
+
+  @Post("/delete")
+  deleteAll(@Body() deleteFormsDto: DeleteFormsDto) {
+    return this.FormsService.deleteAll(deleteFormsDto);
   }
 
   

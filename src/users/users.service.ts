@@ -18,6 +18,9 @@ export class UsersService {
       throw new HttpException("User already exists",HttpStatus.BAD_REQUEST) ;
     } 
 
+    const hashedPassword = await hash(createUserDto.password.toString(), 10);
+    createUserDto.password = hashedPassword;
+
     const createdUser = new this.userModel(createUserDto) ;
     return createdUser.save();
   }
