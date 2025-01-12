@@ -3,9 +3,19 @@ import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 
-@Controller('project')
+@Controller('projects')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
+
+  @Get('mobile/dashboard')
+  async getMobileDashboardProjects() {
+    return this.projectService.getMobileDashboardProjects();
+  }
+
+  @Get('dashboard')
+  async getDashboardProjects() {
+    return this.projectService.getDashboardProjects();
+  }
 
   @Post()
   create(@Body() createProjectDto: CreateProjectDto) {
@@ -50,5 +60,10 @@ export class ProjectController {
   @Patch(':id/remove-form/:formId')
   removeForm(@Param('id') projectId: string, @Param('formId') formId: string) {
     return this.projectService.removeFormFromProject(projectId, formId);
+  }
+
+  @Get(':id/forms')
+  async getProjectForms(@Param('id') projectId: string) {
+    return this.projectService.getProjectForms(projectId);
   }
 }

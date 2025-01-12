@@ -7,6 +7,8 @@ export type ProjectDocument = Project & Document;
 
 @Schema({ timestamps: true })
 export class Project {
+  _id: Types.ObjectId;
+
   @Prop({ required: true })
   name: string;
 
@@ -36,6 +38,9 @@ export class Project {
 
   @Prop({ default: 'En cours' })
   status: string;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

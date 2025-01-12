@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { Project } from 'src/project/schemas/project.schema';
 
-export type FormDocument = HydratedDocument<Form>;
+export type FormDocument = Form & Document;
 
 @Schema()
 export class Condition {
@@ -85,6 +85,8 @@ export const FieldSchema = SchemaFactory.createForClass(Field);
 
 @Schema({ timestamps: true })
 export class Form {
+  _id: Types.ObjectId;
+
   @Prop({ default: '1.0' })
   version: string;
 
@@ -106,9 +108,6 @@ export class Form {
   @Prop()
   header: string;
 
-  @Prop()
-  logo: string;
-
   @Prop({ type: [FieldSchema] })
   fields: Field[];
 
@@ -118,9 +117,11 @@ export class Form {
   @Prop()
   groups: string[];
 
-  // Foreign key reference to the Project model
   @Prop({ type: Types.ObjectId, ref: 'Project'})
   project: Project;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const FormSchema = SchemaFactory.createForClass(Form);

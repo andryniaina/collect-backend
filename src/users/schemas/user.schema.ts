@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import { Project } from 'src/project/schemas/project.schema';
+import { Document, Types } from 'mongoose';
 
-export type UserDocument = HydratedDocument<User>;
+export type UserDocument = User & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
+  _id: Types.ObjectId;
+
   @Prop({ required: true, unique: true })
   name: string;
 
@@ -15,21 +16,8 @@ export class User {
   @Prop({ required: true })
   password: string;
 
-  @Prop({ default: 'Admin' })
+  @Prop({ default: 'User' })
   role: string;
-
-  @Prop()
-  phoneNumber: string;
-
-  @Prop()
-  status: string;
-
-  @Prop()
-  description: string;
-
-  // Foreign key reference to the Project model
-  @Prop({ type: Types.ObjectId, ref: 'Project'})
-  project: Project;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

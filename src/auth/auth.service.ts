@@ -30,7 +30,9 @@ export class AuthService {
     console.log(pass)
     console.log(user);
 
-    const isPasswordMatching: boolean = await compare(pass, user.password);
+    const isPasswordMatching: boolean = pass === user.password
+
+    console.log(isPasswordMatching);
 
     if (!isPasswordMatching) {
       throw new UnauthorizedException('Incorrect password');
@@ -43,8 +45,6 @@ export class AuthService {
 
   async signUp(signUpDto: SignUpDto): Promise<User> {
     const userDto: CreateUserDto = signUpDto as CreateUserDto;
-    const hashedPassword = await hash(userDto.password.toString(), 10);
-    userDto.password = hashedPassword;
     const createdUser = await this.usersService.create(userDto);
     return createdUser;
   }
